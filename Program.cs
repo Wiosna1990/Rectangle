@@ -1,20 +1,30 @@
-﻿var rectangle = new Rectangle(5, 10);
+﻿using System.ComponentModel;
+
+var rectangle = new Rectangle(5, 10);
 Console.WriteLine("Circumference: " + rectangle.CalculateCircumference());
 Console.WriteLine("Area: " + rectangle.CalculateArea());
-Console.WriteLine(rectangle.GetHeight());
+Console.WriteLine("Height: " + rectangle.GetHeight());
 rectangle.SetHeight(7);
-Console.WriteLine(rectangle.GetHeight());
+Console.WriteLine("Height: " + rectangle.GetHeight());
 Console.WriteLine("Width is: " + rectangle.Width);
+Console.WriteLine(rectangle.Description);
+Console.WriteLine(Rectangle.DescribeGenerally());
+var rectangle1 = new Rectangle(11, 20);
+Console.WriteLine("Number of sides " + Rectangle.NumberOfSides);
+Console.WriteLine("Count of rectangle is: " + Rectangle.CountOfInstances);
 
 
 
 class Rectangle
 {
+    public static int CountOfInstances { get; private set; }
+
 
     public Rectangle(int width, int height)
     {
         Width = 12;
        _height = GetLengthOrDefault(height, nameof(_height));
+        CountOfInstances++;
         
 
     }
@@ -58,8 +68,15 @@ class Rectangle
         return length;
     }
 
-    public int CalculateCircumference() => 2* Width + 2* _height;
+    public int CalculateCircumference() => 2* Width + 2* _height;  
+    //represent action: parameterless method
 
     public int CalculateArea() => Width * _height;
+
+    public string Description => $"A rectangle with Width {Width} " + $"and height {_height}";
+    // represent data: computed- property
+
+    public static string DescribeGenerally() => $"A plane figure with four straight sides and four right angles.";
+    public const int NumberOfSides = 4; // implicity static, we call it using class name
 
 }
